@@ -1,0 +1,15 @@
+<div ng-controller="charLimiterController">
+
+<textarea ng-model="model.value"
+          name="textarea"
+          rows="3"
+          class="umb-editor umb-textarea textstring"
+          ng-change="charLimiterController.limitCharacters()">
+</textarea>
+    <div>
+        <small>{{info}}</small>
+    </div>
+
+
+
+</div>

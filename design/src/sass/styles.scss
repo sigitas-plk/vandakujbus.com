@@ -1,0 +1,51 @@
+//@font-face {
+//  font-family: 'Oswald';
+//  src: url('fonts/Oswald/Oswald-Light.ttf');
+//  src: url('fonts/Oswald/Oswald-Bold.ttf');
+//  src: url('fonts/Oswald/Oswald-Medium.ttf');
+//  src: url('fonts/Oswald/Oswald-Regular.ttf');
+//  src: url('fonts/Oswald/Oswald-SemiBold.ttf');
+//  src: url('fonts/Oswald/Oswald-ExtraLight.ttf');
+//}
+//
+//@font-face {
+//  font-family: 'Lato';
+//  src: url('fonts/Lato/Lato-Regular.ttf');
+//  src: url('fonts/Lato/Lato-Black.ttf');
+//  src: url('fonts/Lato/Lato-Bold.ttf');
+//  src: url('fonts/Lato/Lato-Hairline.ttf');
+//  src: url('fonts/Lato/Lato-Light.ttf');
+//}
+
+@import 'libs/mdl/material-design-lite';
+@import 'partials/blogRepo';
+@import 'partials/blogPost';
+
+
+.v-landingPage--photo > img{
+    height: 300px !important;
+  width:auto;
+    padding-left: 50px;
+}
+
+.mdl-grid {
+  max-width: 800px;
+}
+.page-content{
+  padding: 100px 0;
+}
+.v-logo {
+    height: 100px;
+    background: no-repeat center;
+    background-size: contain;
+}
+/* Responsive Images */
+img {
+  width: 100%;
+  height: auto;
+}
+
+/*Contact Form Error message visibility*/
+#contact-form .mdl-textfield__error {
+  visibility: visible;
+}

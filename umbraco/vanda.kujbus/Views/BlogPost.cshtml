@@ -1,0 +1,28 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.BlogPost>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "MasterPage.cshtml";
+}
+
+
+<div class="umb-grid">
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+            <div class="blogpost--date">
+                @CurrentPage.CreateDate.ToString("D")
+            </div>
+            <h1 class="mdl-typography--display-1 blogpost--title">
+                @CurrentPage.Name
+            </h1>
+            <p class="blogpost--author">Written by <strong>@Model.Content.WriterName</strong></p>
+            @if (CurrentPage.featuredImage != null && !CurrentPage.hideFeatured)
+            {
+                <img src="@CurrentPage.GetCropUrl("featuredImage", "Blog Post Image")" />
+
+            }
+        </div>
+    </div>
+    <div class="blogpost--body">
+        @CurrentPage.GetGridHtml("grd", "GrdBase")
+    </div>
+</div>

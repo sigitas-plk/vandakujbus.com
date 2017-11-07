@@ -1,0 +1,35 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.BlogRepository>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "MasterPage.cshtml";
+}
+<section class="umb-grid">
+    <div class="mdl-grid">
+		<div class="mdl-cell mdl-cell--12-col">
+		<h2 class=" mdl-typography--display-1">@CurrentPage.blogRepoTitle</h2>
+			<h3 class=" mdl-typography--subhead">@CurrentPage.blogRepoSubtitle</h3>
+		</div>
+        @foreach (var post in CurrentPage.Children.Reverse())
+        {
+            <div class="mdl-cell mdl-cell--4-col">
+                <div class="blogpost-card">
+
+                    @if (post.FeaturedImage != null)
+                    {
+                        <div class="blogpost-card--img-container">
+                            <img  src="@post.GetCropUrl("featuredImage", "Blog Card Image")" class="blogpost-card--img" />
+                        </div>
+                    }
+                    <p class="blogpost-card--date">@post.CreateDate.ToLongDateString()</p>
+                    <h2 class="mdl-typography--title blogpost-card--title">@post.Name</h2>
+                    <p class="blogpost-card--body">@Umbraco.Truncate(post.Introduction, 240, true)</p>
+                    <div class="blogpost-card--action">
+                        <a href="@post.Url" class="mdl-button mdl-button--primary">
+                            Continue reading ...
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

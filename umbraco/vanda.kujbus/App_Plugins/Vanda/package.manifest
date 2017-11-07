@@ -1,0 +1,78 @@
+﻿{
+  "gridEditors": [
+    {
+      "name": "Headline (h2)",
+      "alias": "vHeadline",
+      "icon":"icon-coin",
+      "view": "textstring",
+      "config": {
+        "style": "font-size: 34px; line-height: 38px; font-weight: 200",
+        "markup": "<h2 class='mdl-typography--display-1'>#value#</h2>"
+      }
+    },
+    {
+      "name": "SubHeadline (h3)",
+      "alias": "vSubHeadline",
+      "icon":"icon-coin",
+      "view": "textstring",
+      "config": {
+        "style": "font-size: 24px; line-height: 28px; font-weight: 200",
+        "markup": "<h3 class='mdl-typography--headline'>#value#</h3>"
+      }
+    },
+    {
+      "name": "SubSubHeadline (h4)",
+      "alias": "vSubSubHeadline",
+      "icon":"icon-coin",
+      "view": "textstring",
+      "config": {
+        "style": "font-size: 20px; line-height: 24px; font-weight: 200",
+        "markup": "<h4 class='mdl-typography--title'>#value#</h4>"
+      }
+    },
+    {
+      "name": "Caption (h6)",
+      "alias": "vCaption",
+      "icon": "icon-coin",
+      "view": "textstring",
+      "config": {
+        "style": "font-size: 12px; line-height: 14px; font-weight: 200",
+        "markup": "<h4 class='mdl-typography--caption'>#value#</h4>"
+      }
+    },
+    {
+      "name": "Image (800x450)",
+      "alias": "blogMedia",
+      "view": "media",
+      "icon": "icon-picture",
+      "config": {
+        "size": {
+          "width": 800,
+          "height": 450
+        }
+      }
+    }
+  ],
+  "propertyEditors": [
+    {
+      "name": "Char Limiter",
+      "alias": "charLimiter",
+      "editor": {
+        "view": "/App_Plugins/Vanda/propertyEditors/charLimiter.html"
+      },
+      "prevalues": {
+        "fields": [
+          {
+            "label": "Number of Characters",
+            "description": "Number of max allowed characters in a field",
+            "key": "charLimit",
+            "view": "number"
+          }
+        ]
+      }
+    }
+  ],
+  "javascript": [
+    "/App_Plugins/Vanda/propertyEditors/charLimiterController.js"
+  ]
+}

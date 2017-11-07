@@ -1,0 +1,129 @@
+﻿@inherits UmbracoViewPage<dynamic>
+@using Umbraco.Web.Templates
+@using Newtonsoft.Json.Linq
+
+@*
+    Razor helpers located at the bottom of this file
+*@
+
+@if (Model != null && Model.sections != null)
+{
+    var oneColumn = ((System.Collections.ICollection)Model.sections).Count == 1;
+
+
+        if (oneColumn)
+        {
+            foreach (var section in Model.sections)
+            {
+
+                foreach (var row in section.rows)
+                {
+                    @renderRow(row);
+                }
+
+            }
+        }
+        else
+        {
+            <div class="mdl-grid">
+                @foreach (var s in Model.sections)
+                {
+                    <div class="mdl-cell mdl-cell--@s.grid-col">
+                        <div class="mdl-grid">
+                            @foreach (var row in s.rows)
+                            {
+                                @renderRow(row);
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+
+}
+
+@helper renderRow(dynamic row)
+{
+
+                foreach (var area in row.areas)
+                {
+
+                    var cellClass = string.Format("mdl-cell mdl-cell--{0}-col", area.grid);
+                    <div @RenderClasses(area, cellClass) @RenderStyles(area)>
+
+                        @foreach (var control in area.controls)
+                        {
+                            if (control != null && control.editor != null && control.editor.view != null)
+                            {
+                                <text>@Html.Partial("grid/editors/base", (object)control)</text>
+                            }
+                        }
+                    </div>
+                }
+
+}
+
+@functions {
+    public static MvcHtmlString RenderStyles(dynamic contentItem)
+    {
+        var attrs = new List<string>();
+
+        JObject style = contentItem.styles;
+
+        if (style != null)
+        {
+            var cssVals = new List<string>();
+            foreach (JProperty property in style.Properties())
+                cssVals.Add(property.Name + ":" + property.Value.ToString() + ";");
+
+            if (cssVals.Any())
+                attrs.Add("style=\"" + string.Join(" ", cssVals) + "\"");
+        }
+
+        return new MvcHtmlString(string.Join(" ", attrs));
+    }
+
+    private static MvcHtmlString RenderClasses(dynamic contentItem, string defaultCss)
+    {
+        var attrs = new List<string>();
+        JObject cfg = contentItem.config;
+
+        var classes = new List<string>();
+        var replace = false;
+
+        if (cfg != null)
+        {
+            foreach (JProperty property in cfg.Properties())
+            {
+                var propertyValue = TemplateUtilities.CleanForXss(property.Value.ToString());
+
+                if (property.Name == "class" || property.Name == "addClass")
+                {
+                    classes.Add(propertyValue);
+                }
+                else if (property.Name == "replaceClass")
+                {
+                    replace = true;
+                    classes.Add(propertyValue);
+                }
+                else
+                {
+                    attrs.Add(property.Name + "=\"" + propertyValue + "\"");
+                }
+
+            }
+
+            if (!replace)
+                classes.Add(defaultCss);
+
+            attrs.Add("class=\"" + string.Join(" ", classes) + "\"");
+        }
+        else if (!string.IsNullOrEmpty(defaultCss))
+        {
+            attrs.Add("class=\"" + defaultCss + "\"");
+        }
+
+        return new MvcHtmlString(string.Join(" ", attrs));
+    }
+
+}

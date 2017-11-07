@@ -1,0 +1,44 @@
+$padding: 16px;
+.blogpost-card {
+  background: $card-background-color;
+  @include shadow-2dp();
+  &:hover {
+    @include shadow-4dp();
+  }
+  &--date {
+    padding: $padding/2 $padding $padding/2  $padding;
+    margin: 0;
+    color:  $button-primary-color-alt;
+  }
+  &--title {
+    padding: 0 $padding $padding $padding;
+    margin: 0;
+    font-weight: 200;
+    line-height: 1.5;
+  }
+  &--body {
+    padding: 0 $padding $padding $padding;
+   color: $default-item-text-color;
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+  &--action {
+    border-top: 1px solid $button-active-color;
+    padding: $padding/2;
+  }
+  &--img {
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+    &-container {
+      position: relative;
+      overflow: hidden;
+      height: 9em;
+      background: $text-link-color;
+    }
+  }
+}
+

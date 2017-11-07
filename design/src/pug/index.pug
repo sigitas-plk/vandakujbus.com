@@ -1,0 +1,23 @@
+html
+    head
+        link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+        link(rel="stylesheet" href="css/styles.css")
+    body
+    .mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout--fixed-drawer
+        -var links =["Products","Pricing","About Us","Contact Us"];
+        header.mdl-layout__header
+            .mdl-layout__header-row
+                .mdl-layout-spacer
+                h1.mdl-typography--display-1 Vanda Kujbus
+        .mdl-layout__drawer
+            span.mdl-layout-title
+                a(href="#")
+                    img(src="img/logo.png").v-logo
+            nav.mdl-navigation
+                for link in links
+                    a(href="").mdl-navigation__link #{link}
+        main.mdl-layout__content
+            .page-content
+                include partials/blogPost
+
+
